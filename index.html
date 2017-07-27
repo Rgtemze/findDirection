@@ -41,6 +41,8 @@
       }else{
         current = [lat,lng]
         console.log('current is ', current, 'but previous was ', previous)
+
+        //Find the direction
         if(current[0] != previous[0] || current[1] != previous[1]){
           var res = findSlopeandRadian(current,previous)
           if(res[1] < - 65 || res[1] > 65){
@@ -49,6 +51,29 @@
             }else{
               console.log('SOUTH')
             }
+          }else if(res[1] < -25 || res[1] > 25){
+            if(current[0] > previous[0]){
+
+              if(current[1] > previous[1]){
+                console.log('NORTH EAST')
+              }else{
+                console.log('NORTH WEST')
+              }
+            }else{
+              if(current[1] > previous[1]){
+                console.log('SOUTH EAST')
+              }else{
+                console.log('SOUTH WEST')
+              }
+            }
+          }else{
+
+            if(current[1] > previous[1]){
+              console.log('EAST')
+            }else{
+              console.log('WEST')
+            }
+
           }
           console.log('slope is ', res[0], ' degree is ',res[1], 'degree')
         }
