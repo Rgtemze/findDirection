@@ -3,16 +3,75 @@
 <html>
 <head>
   <title>Find Direction</title>
+  <style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 100%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
 </head>
 <body onLoad = "getLocation()">
   <script>
+    var current = null;
+    var previous = null;
+    var map;
+    var flightPath;
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition((position) => {console.log(position.coords.latitude,position.coords.longitude)});
+            navigator.geolocation.watchPosition(trackLocation);
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
     }
+    function trackLocation(pos){
+      var lat = pos.coords.latitude;
+      var lng = pos.coords.longitude;
+      if(!current && !previous){
+        current = previous = [lat,lng]
+        map.setCenter({lat: current[0], lng:current[1]});
+      }else{
+        current = [lat,lng]
+        console.log('current is ', current, 'but previous was ', previous)
+        flightPath.setPath([{lat: previous[0],lng: previous[1]},{lat: current[0] ,lng: current[1]}])
+        previous = current
+
+      }
+
+    }
+  </script>
+  <div id="map"></div>
+  <script>
+    function initMap() {
+       map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 19,
+        center: {lat: 0, lng: -180},
+        mapTypeId: 'terrain'
+      });
+      flightPath = new google.maps.Polyline({
+        path: {},
+        icons: [{
+                  icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW},
+                  offset: '100%',
+                  repeat: '20px'
+              }],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+
+      flightPath.setMap(map);
+    }
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM3NbeAhH1WZp727f8dfv7FMjXuG5ybAY&callback=initMap">
   </script>
 </body>
 </html>
