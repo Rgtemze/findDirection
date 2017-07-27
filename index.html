@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Merhaba</title>
+  <title>Find Direction</title>
 </head>
 <body onLoad = "getLocation()">
   <script>
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {console.log(position.coords.latitude,position.coords.longitude)});
+            navigator.geolocation.watchPosition((position) => {console.log(position.coords.latitude,position.coords.longitude)});
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
