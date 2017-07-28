@@ -4,9 +4,12 @@
 <head>
   <title>Find Direction</title>
   <style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
   #map {
     height: 100%;
   }
+  /* Optional: Makes the sample page fill the window. */
   html, body {
     height: 100%;
     margin: 0;
@@ -88,7 +91,20 @@
 
     }
   </script>
-  <div id="map"></div>
+  <style>
+   #wrapper { position: relative; height: 100%; margin: 0; padding: 0;}
+   #over_map { position: absolute; bottom: 10px; right: 10px; z-index: 99; }
+  </style>
+
+  <div id="wrapper">
+     <div id="map">
+
+     </div>
+
+     <div id="over_map">
+       <img height = "400" width = "400" src = "./compass.png" />
+     </div>
+  </div>
   <script>
 
     function initMap() {
