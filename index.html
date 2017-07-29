@@ -60,14 +60,19 @@
 
               if(current[1] > previous[1]){
                 console.log('NORTH EAST')
+                imgCompass.src = "./assets/compassnortheast.png"
               }else{
                 console.log('NORTH WEST')
+                imgCompass.src = "./assets/compassnorthwest.png"
               }
             }else{
               if(current[1] > previous[1]){
                 console.log('SOUTH EAST')
+                imgCompass.src = "./assets/compasssoutheast.png"
+
               }else{
                 console.log('SOUTH WEST')
+                imgCompass.src = "./assets/compasssouthwest.png"
               }
             }
           }else{
@@ -108,7 +113,7 @@
      </div>
 
      <div id="over_map">
-       <img id='compass' height = "400" width = "400" src = "./compass.png" />
+       <img id='compass' height = "400" width = "400" src = "./assets/compass.png" />
      </div>
   </div>
   <script>
